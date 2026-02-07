@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StudyCups - College Discovery &amp; Collaboration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "accent-orange": "#f97316",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b]">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/10 px-6 py-3 lg:px-20">
+<div class="max-w-[1280px] mx-auto flex items-center justify-between gap-4">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">local_cafe</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">StudyCups</h2>
+</div>
+</div>
+<div class="flex items-center gap-4 lg:gap-8">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Colleges</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Reviews</a>
+<a class="text-slate-600 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Compare</a>
+</nav>
+<div class="flex gap-2">
+<button class="hidden sm:flex min-w-[84px] items-center justify-center rounded-lg h-10 px-4 border border-primary/20 bg-white dark:bg-slate-900 text-primary text-sm font-semibold hover:bg-primary/5 transition-all">
+<span>Login</span>
+</button>
+<button class="flex min-w-[100px] items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-semibold shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all">
+<span>Sign-up</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<section class="relative bg-gradient-to-b from-white to-background-light dark:from-background-dark dark:to-slate-900 py-16 lg:py-24">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-20">
+<div class="flex flex-col items-center text-center gap-8 mb-12">
+<div class="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">school</span>
+<span>Next-Gen College Discovery</span>
+</div>
+<h1 class="text-[#0d121b] dark:text-white text-4xl lg:text-6xl font-black leading-[1.1] tracking-tight max-w-[900px]">
+                        Find the Right College. <span class="text-primary text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">Collaborate with the Best.</span>
+</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg lg:text-xl font-normal max-w-[700px]">
+                        Explore thousands of colleges, read authentic student reviews, and join collaborative peer groups to level up your academic journey.
+                    </p>
+<div class="w-full max-w-2xl mt-4">
+<div class="flex w-full items-stretch rounded-2xl h-16 border-2 border-primary/10 bg-white dark:bg-slate-900 shadow-2xl overflow-hidden focus-within:border-primary/40 transition-all">
+<div class="text-primary flex items-center justify-center px-5">
+<span class="material-symbols-outlined text-[28px]">search</span>
+</div>
+<input class="w-full border-none bg-transparent focus:ring-0 text-lg placeholder:text-slate-400" placeholder="Search for Colleges, Courses or Reviews..." type="text"/>
+<button class="bg-primary text-white px-8 font-bold text-lg hover:bg-primary/90 transition-colors">Search</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+<div class="group relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-slate-800 p-8 shadow-xl border border-slate-100 dark:border-slate-700 hover:shadow-2xl transition-all cursor-pointer">
+<div class="relative z-10">
+<div class="size-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-[32px]">map</span>
+</div>
+<h3 class="text-2xl font-bold mb-3 dark:text-white">Find Your Best Fit College</h3>
+<p class="text-slate-600 dark:text-slate-400 mb-6">Personalized college matches based on your grades, budget, and career goals.</p>
+<span class="inline-flex items-center text-primary font-bold gap-2 group-hover:gap-3 transition-all">Explore Roadmap <span class="material-symbols-outlined">arrow_forward</span></span>
+</div>
+<div class="absolute -bottom-10 -right-10 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[160px]">travel_explore</span>
+</div>
+</div>
+<div class="group relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-slate-800 p-8 shadow-xl border border-slate-100 dark:border-slate-700 hover:shadow-2xl transition-all cursor-pointer">
+<div class="relative z-10">
+<div class="size-14 rounded-2xl bg-accent-orange/10 flex items-center justify-center text-accent-orange mb-6">
+<span class="material-symbols-outlined text-[32px]">groups_3</span>
+</div>
+<h3 class="text-2xl font-bold mb-3 dark:text-white">Collaborate with Peer Groups</h3>
+<p class="text-slate-600 dark:text-slate-400 mb-6">Connect with current students and applicants. Share notes and prep together.</p>
+<span class="inline-flex items-center text-accent-orange font-bold gap-2 group-hover:gap-3 transition-all">Join Community <span class="material-symbols-outlined">arrow_forward</span></span>
+</div>
+<div class="absolute -bottom-10 -right-10 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-[160px]">forum</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-white dark:bg-slate-900 py-24">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-20">
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+<div class="flex flex-col gap-4">
+<h2 class="text-3xl lg:text-4xl font-extrabold tracking-tight text-[#0d121b] dark:text-white">Top Rated Colleges</h2>
+<p class="text-slate-600 dark:text-slate-400 text-lg max-w-[600px]">Based on verified student reviews for placement, faculty, and campus life.</p>
+</div>
+<button class="text-primary font-bold flex items-center gap-2 hover:underline">
+                        View All Rankings <span class="material-symbols-outlined">open_in_new</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-background-light dark:bg-background-dark rounded-3xl p-6 border border-slate-200 dark:border-slate-800 hover:scale-[1.02] transition-transform">
+<div class="h-48 rounded-2xl bg-slate-300 dark:bg-slate-700 mb-6 bg-cover bg-center overflow-hidden" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCqbTIGU95cqXXs348RtY1zjhoFipJrkE4-kfd_SKnbExKzfM3A9Bo7O6keTsRF2C9kbK8kMLAwpsHRw8gjeZvBM-iBni4LKL-MFlvOjJwUucRZrDOov9yJCKNrejRUnD-MkwjRbmFveh1nn6SYpbku0UhhA8I9G4SFHsmjtoVyQwsI95xOzNiYy2PcDhQixZnec8btXD2Clyvs-RmpBI5ezTmGiyWjd5N_s9sITNYOPPVCo-MXD2t5i5oH8sZxsDR4pdCff-TDTK-d')"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-xl dark:text-white">Stanford University</h4>
+<p class="text-sm text-slate-500">California, USA</p>
+</div>
+<div class="bg-green-100 text-green-700 px-2 py-1 rounded text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] fill-1">star</span> 4.9
+                            </div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-white dark:bg-slate-800 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">Engineering</span>
+<span class="px-3 py-1 bg-white dark:bg-slate-800 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">Research</span>
+</div>
+<button class="w-full py-3 rounded-xl border border-primary/20 text-primary font-bold hover:bg-primary hover:text-white transition-all">View 1.2k Reviews</button>
+</div>
+<div class="bg-background-light dark:bg-background-dark rounded-3xl p-6 border border-slate-200 dark:border-slate-800 hover:scale-[1.02] transition-transform">
+<div class="h-48 rounded-2xl bg-slate-300 dark:bg-slate-700 mb-6 bg-cover bg-center overflow-hidden" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBzh4pUIJV8Cp26Lc6Sre3TDkCrslM4AaxboJX3NzGDOVGoi_NULXbAKcv247fXwpN62g5HCPmAn4qIqyEElatWgmt2602EnVJl34HCkZkF3kiADve92k5lMHA8V6E13hkyV5AYxzMIeZNE-QCRxcAcsJGONSujEODAqGWAXVuVyzSpsKj-bhYKk0lDVUhwUffEH1o_C7cBZLDsz79iFmwW1CFR4uD2Z9sbHz1ca3MwtcalCI_dfQ0xFf0nXFw9ibI95KATofBduFRq')"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-xl dark:text-white">IIT Delhi</h4>
+<p class="text-sm text-slate-500">New Delhi, India</p>
+</div>
+<div class="bg-green-100 text-green-700 px-2 py-1 rounded text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] fill-1">star</span> 4.8
+                            </div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-white dark:bg-slate-800 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">Placement</span>
+<span class="px-3 py-1 bg-white dark:bg-slate-800 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">Tech</span>
+</div>
+<button class="w-full py-3 rounded-xl border border-primary/20 text-primary font-bold hover:bg-primary hover:text-white transition-all">View 2.5k Reviews</button>
+</div>
+<div class="bg-background-light dark:bg-background-dark rounded-3xl p-6 border border-slate-200 dark:border-slate-800 hover:scale-[1.02] transition-transform">
+<div class="h-48 rounded-2xl bg-slate-300 dark:bg-slate-700 mb-6 bg-cover bg-center overflow-hidden" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0zsQJC7NKnfO2Ee24TxxI_NdkDVZPMNAO24x7TtDfKbXIJKQMDokiOsT7s64T1PZscBkSCB4_bf9k7aAMfeUUsxefCKm0VfocUM9KhmUKJj2-lGkaLWrLhVUmS_pIxETADc9K0L81ivnkAgd3e8_pcschigEZHfs1T3Xn5e0bmk6TeWxl5y-tE6Kle5JAOiIiUj10I_eV4qqnzbJ7ZO_ulHtrMY27DGKc5flT4sX6B2BKIA2HtnfiWZsnz2-U3mauRD1N9SM8WP8C')"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="font-bold text-xl dark:text-white">Harvard University</h4>
+<p class="text-sm text-slate-500">Massachusetts, USA</p>
+</div>
+<div class="bg-green-100 text-green-700 px-2 py-1 rounded text-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] fill-1">star</span> 4.9
+                            </div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-white dark:bg-slate-800 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">Law</span>
+<span class="px-3 py-1 bg-white dark:bg-slate-800 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">Business</span>
+</div>
+<button class="w-full py-3 rounded-xl border border-primary/20 text-primary font-bold hover:bg-primary hover:text-white transition-all">View 900 Reviews</button>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-[1280px] mx-auto px-6 lg:px-20 py-20">
+<div class="bg-primary rounded-[3rem] overflow-hidden p-8 lg:p-16 text-white relative">
+<div class="absolute top-0 right-0 w-1/3 h-full bg-white/5 skew-x-12 translate-x-1/4"></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+<div>
+<h2 class="text-3xl lg:text-5xl font-black mb-6">Make Informed Decisions with Side-by-Side Comparison</h2>
+<p class="text-white/80 text-lg mb-8">Not sure which one to pick? Compare fees, placements, ROI, and faculty stats between any two colleges instantly.</p>
+<div class="flex flex-wrap gap-4">
+<div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-sm font-medium">Placement Stats</span>
+</div>
+<div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-sm font-medium">Fee Breakdown</span>
+</div>
+<div class="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-sm font-medium">Alumni Network</span>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-[2rem] p-6 text-slate-800 shadow-2xl">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+<div class="size-10 bg-slate-200 rounded flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">add</span>
+</div>
+<span class="flex-1 font-medium text-slate-400">Select first college...</span>
+<span class="material-symbols-outlined text-slate-300">keyboard_arrow_down</span>
+</div>
+<div class="flex justify-center -my-2 relative z-10">
+<div class="size-10 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold shadow-lg">VS</div>
+</div>
+<div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+<div class="size-10 bg-slate-200 rounded flex items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">add</span>
+</div>
+<span class="flex-1 font-medium text-slate-400">Select second college...</span>
+<span class="material-symbols-outlined text-slate-300">keyboard_arrow_down</span>
+</div>
+<button class="w-full h-14 bg-accent-orange text-white rounded-xl font-bold text-lg mt-2 shadow-lg shadow-accent-orange/30 hover:bg-orange-600 transition-all">
+                                Compare Now
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="max-w-[1280px] mx-auto px-6 lg:px-20 py-20 border-t border-slate-100 dark:border-slate-800">
+<div class="flex flex-col items-center text-center gap-4 mb-16">
+<h2 class="text-3xl lg:text-4xl font-extrabold tracking-tight text-[#0d121b] dark:text-white">Why Collaborate on StudyCups?</h2>
+<div class="h-1.5 w-20 bg-primary rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm">
+<div class="size-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[32px]">reviews</span>
+</div>
+<h3 class="text-xl font-bold mb-3 dark:text-white">Real Student Feedback</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Get the ground truth from students who actually study there. Unbiased reviews on life, labs, and faculty.</p>
+</div>
+<div class="p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm">
+<div class="size-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[32px]">diversity_3</span>
+</div>
+<h3 class="text-xl font-bold mb-3 dark:text-white">Study Tribes</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Join specialized groups for JEE, NEET, SAT, or specific university courses. Don't study alone.</p>
+</div>
+<div class="p-8 rounded-[2rem] border border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-800 shadow-sm">
+<div class="size-14 rounded-2xl bg-green-50 text-green-600 flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-[32px]">quick_reference</span>
+</div>
+<h3 class="text-xl font-bold mb-3 dark:text-white">Shared Resources</h3>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed">Access a massive library of notes, pyqs, and summaries shared by the community for free.</p>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-20 py-12">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8 pb-12">
+<div class="flex items-center gap-2 text-primary">
+<div class="size-6 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-sm">local_cafe</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight">StudyCups</h2>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-slate-500 hover:text-primary text-sm font-medium transition-colors" href="#">Colleges</a>
+<a class="text-slate-500 hover:text-primary text-sm font-medium transition-colors" href="#">Study Materials</a>
+<a class="text-slate-500 hover:text-primary text-sm font-medium transition-colors" href="#">Community</a>
+<a class="text-slate-500 hover:text-primary text-sm font-medium transition-colors" href="#">Support</a>
+</div>
+<div class="flex gap-4">
+<a class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">account_circle</span>
+</a>
+<a class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">share</span>
+</a>
+<a class="size-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-primary hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined text-xl">mail</span>
+</a>
+</div>
+</div>
+<div class="border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+<p class="text-slate-400 text-sm">© 2024 StudyCups.in. Helping students make the best choices.</p>
+<div class="flex items-center gap-2 text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm text-accent-orange">favorite</span>
+<span>Built for students worldwide</span>
+</div>
+</div>
+</div>
+</footer>
+</div>
+
+</body></html>
