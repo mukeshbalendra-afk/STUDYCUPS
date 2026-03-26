@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scratch Offer</title>
+<title>Scratch & Win</title>
 
 <style>
 body{
@@ -23,33 +23,21 @@ text-align:center;
 width:320px;
 }
 
-input{
-width:90%;
-padding:10px;
-margin:8px 0;
-border-radius:8px;
-border:1px solid #ccc;
+h3{
+color:#892043;
 }
 
-button{
-background:#892043;
-color:white;
-border:none;
-padding:10px 20px;
-border-radius:8px;
-cursor:pointer;
-}
-
-#scratchBox{
-display:none;
-margin-top:15px;
+/* scratch box */
+.scratchBox{
+position:relative;
+margin-top:10px;
 }
 
 canvas{
 border-radius:10px;
 }
 
-/* hidden reward */
+/* reward hidden */
 .reward{
 display:none;
 font-size:22px;
@@ -91,58 +79,36 @@ animation:fly 1s linear infinite;
 
 <div class="card">
 
-<h3>🎯 Unlock Your Scholarship</h3>
+<h3>🎯 Scratch & Win Reward</h3>
 
-<!-- FORM -->
-<div id="formBox">
-<input id="name" placeholder="Enter Name">
-<input id="phone" placeholder="Enter Phone">
-<button onclick="startScratch()">Continue</button>
-</div>
+<div id="scratchBox" class="scratchBox">
 
-<!-- SCRATCH AREA -->
-<div id="scratchBox">
 <canvas id="canvas" width="300" height="120"></canvas>
 
 <div id="reward" class="reward">
-🎉 ₹5000 SCHOLARSHIP UNLOCKED 🎉
+🎉 ₹5000 WON 🎉
 </div>
 
 <div id="sparkle" class="sparkle"></div>
+
 </div>
+
+<p id="msg" style="color:red;font-weight:bold;"></p>
 
 </div>
 
 <script>
 
-// prevent repeat
-if(localStorage.getItem("claimed")){
-document.getElementById("formBox").innerHTML="⚠️ Offer already claimed";
-}
-
-// STEP 1 → SHOW SCRATCH ONLY AFTER FORM
-function startScratch(){
-
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-
-if(name=="" || phone==""){
-alert("Please fill details");
-return;
-}
-
-document.getElementById("formBox").style.display="none";
-document.getElementById("scratchBox").style.display="block";
-
-initScratch();
-}
-
-// STEP 2 → SCRATCH LOGIC
-function initScratch(){
-
 var canvas=document.getElementById("canvas");
 var ctx=canvas.getContext("2d");
 
+// already used check
+if(localStorage.getItem("claimed")){
+canvas.style.display="none";
+document.getElementById("msg").innerText="⚠️ You already claimed this offer";
+}
+
+// silver layer
 ctx.fillStyle="#C0C0C0";
 ctx.fillRect(0,0,300,120);
 
@@ -159,10 +125,10 @@ ctx.beginPath();
 ctx.arc(x,y,20,0,Math.PI*2);
 ctx.fill();
 
-// STEP 3 → SHOW REWARD ONLY AFTER SCRATCH
 if(!revealed){
 revealed=true;
 
+// show reward
 document.getElementById("reward").style.display="block";
 
 // sparkle
@@ -176,7 +142,6 @@ sp.appendChild(s);
 
 // mark claimed
 localStorage.setItem("claimed",true);
-
 }
 }
 
@@ -190,8 +155,6 @@ canvas.addEventListener("touchmove",e=>{
 scratch(e.touches[0].clientX,e.touches[0].clientY);
 e.preventDefault();
 });
-
-}
 
 </script>
 
