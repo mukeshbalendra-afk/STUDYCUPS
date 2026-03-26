@@ -1,192 +1,191 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Scratch & Win</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scratch Offer</title>
 
-  <style>
-    body {
-      margin:0;
-      font-family:sans-serif;
-      background:linear-gradient(135deg,#892043,#c2185b);
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      height:100vh;
-    }
+<style>
+body{
+margin:0;
+font-family:sans-serif;
+background:linear-gradient(135deg,#892043,#c2185b);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
 
-    .card {
-      max-width:380px;
-      width:100%;
-      text-align:center;
-      border-radius:15px;
-      overflow:hidden;
-      box-shadow:0 10px 25px rgba(0,0,0,0.3);
-      background:white;
-    }
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+text-align:center;
+width:320px;
+}
 
-    .top {
-      background:#892043;
-      color:white;
-      padding:15px;
-      font-size:18px;
-      font-weight:bold;
-    }
+input{
+width:90%;
+padding:10px;
+margin:8px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
 
-    .body {
-      padding:20px;
-    }
+button{
+background:#892043;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:8px;
+cursor:pointer;
+}
 
-    .scratch-box {
-      position:relative;
-      display:inline-block;
-      margin-top:10px;
-    }
+canvas{
+margin-top:10px;
+border-radius:10px;
+}
 
-    .hidden {
-      width:300px;
-      height:120px;
-      background:white;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      border-radius:10px;
-      position:absolute;
-      top:0;
-      left:0;
-      z-index:1;
-    }
+.reward{
+display:none;
+font-size:20px;
+color:#892043;
+font-weight:bold;
+}
 
-    .reward {
-      font-size:22px;
-      font-weight:bold;
-      color:#892043;
-      display:none;
-      animation: pop 0.5s ease;
-    }
+.sparkle span{
+position:absolute;
+width:5px;
+height:5px;
+background:gold;
+border-radius:50%;
+animation:up 1s infinite;
+}
 
-    @keyframes pop {
-      from {transform:scale(0.5); opacity:0;}
-      to {transform:scale(1); opacity:1;}
-    }
-
-    canvas {
-      position:relative;
-      z-index:2;
-      border-radius:10px;
-    }
-
-    .sparkle {
-      position:absolute;
-      width:100%;
-      height:100%;
-      top:0;
-      left:0;
-      pointer-events:none;
-      display:none;
-    }
-
-    .sparkle span {
-      position:absolute;
-      width:5px;
-      height:5px;
-      background:gold;
-      border-radius:50%;
-      animation: sparkleAnim 1s linear infinite;
-    }
-
-    @keyframes sparkleAnim {
-      0% {transform:translateY(0); opacity:1;}
-      100% {transform:translateY(-50px); opacity:0;}
-    }
-
-  </style>
+@keyframes up{
+0%{opacity:1; transform:translateY(0);}
+100%{opacity:0; transform:translateY(-50px);}
+}
+</style>
 </head>
 
 <body>
 
 <div class="card">
 
-  <div class="top">RALPH RYKER LEARNING</div>
+<h3>🎯 Scratch & Win ₹5000</h3>
 
-  <div class="body">
+<div id="formBox">
+<input id="name" placeholder="Enter Name">
+<input id="phone" placeholder="Enter Phone">
+<button onclick="submitData()">Unlock Offer</button>
+</div>
 
-    <p style="color:#892043;font-weight:bold;">
-      🎯 Scratch & Unlock Your Reward
-    </p>
-
-    <div class="scratch-box">
-
-      <!-- Hidden Content -->
-      <div class="hidden" id="hiddenBox">
-        <div id="rewardText" class="reward">
-          🎉 ₹5000 OFFER WON 🎉
-        </div>
-      </div>
-
-      <!-- Sparkle -->
-      <div class="sparkle" id="sparkle"></div>
-
-      <!-- Canvas -->
-      <canvas id="scratchCard" width="300" height="120"></canvas>
-
-    </div>
-
-  </div>
+<div id="scratchBox" style="display:none;">
+<canvas id="canvas" width="300" height="120"></canvas>
+<div id="reward" class="reward">🎉 ₹5000 WON 🎉</div>
+<div id="sparkle"></div>
+</div>
 
 </div>
 
 <script>
-var canvas = document.getElementById("scratchCard");
-var ctx = canvas.getContext("2d");
 
-// silver layer
-ctx.fillStyle = "#C0C0C0";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
+// 🔥 PASTE YOUR GOOGLE SCRIPT URL HERE
+var API_URL = "PASTE_YOUR_WEB_APP_URL";
 
-let scratched = false;
-
-function scratch(x, y) {
-  var rect = canvas.getBoundingClientRect();
-  x = x - rect.left;
-  y = y - rect.top;
-
-  ctx.globalCompositeOperation = "destination-out";
-  ctx.beginPath();
-  ctx.arc(x, y, 20, 0, 2 * Math.PI);
-  ctx.fill();
-
-  if(!scratched){
-    scratched = true;
-
-    // show reward
-    document.getElementById("rewardText").style.display = "block";
-
-    // show sparkle
-    let sparkle = document.getElementById("sparkle");
-    sparkle.style.display = "block";
-
-    for(let i=0;i<25;i++){
-      let s = document.createElement("span");
-      s.style.left = Math.random()*100+"%";
-      s.style.top = Math.random()*100+"%";
-      sparkle.appendChild(s);
-    }
-  }
+// prevent repeat
+if(localStorage.getItem("claimed")){
+document.getElementById("formBox").innerHTML="⚠️ Offer already claimed";
 }
 
-// mouse
-canvas.addEventListener("mousemove", function(e) {
-  if (e.buttons === 1) scratch(e.clientX, e.clientY);
+function submitData(){
+
+let name=document.getElementById("name").value;
+let phone=document.getElementById("phone").value;
+
+if(name==""||phone==""){
+alert("Fill details");
+return;
+}
+
+fetch(API_URL,{
+method:"POST",
+body:JSON.stringify({name,phone})
+})
+.then(res=>res.text())
+.then(res=>{
+
+if(res=="EXISTS"){
+alert("Already claimed!");
+return;
+}
+
+document.getElementById("formBox").style.display="none";
+document.getElementById("scratchBox").style.display="block";
+initScratch();
+
 });
 
-// touch
-canvas.addEventListener("touchmove", function(e) {
-  var touch = e.touches[0];
-  scratch(touch.clientX, touch.clientY);
-  e.preventDefault();
+}
+
+function initScratch(){
+
+var canvas=document.getElementById("canvas");
+var ctx=canvas.getContext("2d");
+
+ctx.fillStyle="#C0C0C0";
+ctx.fillRect(0,0,300,120);
+
+let done=false;
+
+function scratch(x,y){
+
+var rect=canvas.getBoundingClientRect();
+x=x-rect.left;
+y=y-rect.top;
+
+ctx.globalCompositeOperation="destination-out";
+ctx.beginPath();
+ctx.arc(x,y,20,0,Math.PI*2);
+ctx.fill();
+
+if(!done){
+done=true;
+
+document.getElementById("reward").style.display="block";
+
+let sp=document.getElementById("sparkle");
+
+for(let i=0;i<30;i++){
+let s=document.createElement("span");
+s.style.left=Math.random()*100+"%";
+s.style.top=Math.random()*100+"%";
+sp.appendChild(s);
+}
+
+// mark claimed
+localStorage.setItem("claimed",true);
+
+// 🔥 WhatsApp redirect
+setTimeout(()=>{
+window.location.href="https://wa.me/91XXXXXXXXXX?text=I%20won%205000%20offer";
+},2000);
+
+}
+
+}
+
+canvas.addEventListener("mousemove",e=>{
+if(e.buttons==1) scratch(e.clientX,e.clientY);
 });
+
+canvas.addEventListener("touchmove",e=>{
+scratch(e.touches[0].clientX,e.touches[0].clientY);
+e.preventDefault();
+});
+
+}
+
 </script>
 
 </body>
