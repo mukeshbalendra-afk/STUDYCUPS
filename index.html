@@ -3,78 +3,136 @@
 <head>
   <title>Scratch & Win</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin:0;
+      font-family:sans-serif;
+      background:linear-gradient(135deg,#892043,#c2185b);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+
+    .card {
+      max-width:380px;
+      width:100%;
+      text-align:center;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 10px 25px rgba(0,0,0,0.3);
+      background:white;
+    }
+
+    .top {
+      background:#892043;
+      color:white;
+      padding:15px;
+      font-size:18px;
+      font-weight:bold;
+    }
+
+    .body {
+      padding:20px;
+    }
+
+    .scratch-box {
+      position:relative;
+      display:inline-block;
+      margin-top:10px;
+    }
+
+    .hidden {
+      width:300px;
+      height:120px;
+      background:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      border-radius:10px;
+      position:absolute;
+      top:0;
+      left:0;
+      z-index:1;
+    }
+
+    .reward {
+      font-size:22px;
+      font-weight:bold;
+      color:#892043;
+      display:none;
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      from {transform:scale(0.5); opacity:0;}
+      to {transform:scale(1); opacity:1;}
+    }
+
+    canvas {
+      position:relative;
+      z-index:2;
+      border-radius:10px;
+    }
+
+    .sparkle {
+      position:absolute;
+      width:100%;
+      height:100%;
+      top:0;
+      left:0;
+      pointer-events:none;
+      display:none;
+    }
+
+    .sparkle span {
+      position:absolute;
+      width:5px;
+      height:5px;
+      background:gold;
+      border-radius:50%;
+      animation: sparkleAnim 1s linear infinite;
+    }
+
+    @keyframes sparkleAnim {
+      0% {transform:translateY(0); opacity:1;}
+      100% {transform:translateY(-50px); opacity:0;}
+    }
+
+  </style>
 </head>
 
-<body style="margin:0;font-family:sans-serif;background:linear-gradient(135deg,#892043,#c2185b);display:flex;justify-content:center;align-items:center;height:100vh;">
+<body>
 
-<div style="max-width:380px;width:100%;text-align:center;border-radius:15px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.3);background:white;">
+<div class="card">
 
-  <!-- TOP -->
-  <div style="background:#892043;color:white;padding:15px;">
-    <h2 style="margin:0;font-size:18px;">ADVANCE BANKER PROGRAM</h2>
-  </div>
+  <div class="top">ADVANCE BANKER PROGRAM</div>
 
-  <!-- BODY -->
-  <div style="padding:20px;">
-    
-    <p style="color:#892043;font-weight:bold;font-size:18px;">
-      🎯 Scratch & Unlock Your Career Benefit
+  <div class="body">
+
+    <p style="color:#892043;font-weight:bold;">
+      🎯 Scratch & Unlock Your Reward
     </p>
 
-    <!-- SCRATCH -->
-    <div style="position:relative;display:inline-block;">
-      
-      <!-- HIDDEN TEXT -->
-      <div style="
-        width:300px;
-        height:120px;
-        background:white;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        border-radius:10px;
-        position:absolute;
-        top:0;
-        left:0;
-      ">
-        <div style="color:#892043;font-size:18px;font-weight:bold;">
-          🎉 50% Scholarship Unlocked 🎉
-        </div>
-        <div style="font-size:14px;margin-top:5px;">
-          LIMITED OFFER
-        </div>
-        <div style="font-size:14px;font-weight:bold;">
-          Valid only for 24 hours ⏳
+    <div class="scratch-box">
+
+      <!-- Hidden Content -->
+      <div class="hidden" id="hiddenBox">
+        <div id="rewardText" class="reward">
+          🎉 ₹5000 OFFER WON 🎉
         </div>
       </div>
 
-      <!-- CANVAS -->
-      <canvas id="scratchCard" width="300" height="120"
-        style="border-radius:10px;"></canvas>
+      <!-- Sparkle -->
+      <div class="sparkle" id="sparkle"></div>
+
+      <!-- Canvas -->
+      <canvas id="scratchCard" width="300" height="120"></canvas>
 
     </div>
 
-    <p id="msg" style="margin-top:15px;color:green;font-weight:bold;"></p>
-
-    <!-- BUTTON -->
-    <button onclick="claimNow()" style="
-      margin-top:10px;
-      padding:10px 20px;
-      border:none;
-      background:#892043;
-      color:white;
-      border-radius:25px;
-      cursor:pointer;
-    ">
-      Claim Now
-    </button>
-
-  </div>
-
-  <!-- FOOTER -->
-  <div style="background:#892043;color:white;padding:10px;">
-    Limited Seats Available
   </div>
 
 </div>
@@ -83,15 +141,11 @@
 var canvas = document.getElementById("scratchCard");
 var ctx = canvas.getContext("2d");
 
-// already used check
-if(localStorage.getItem("used")){
-  canvas.style.display="none";
-  document.getElementById("msg").innerText="⚠️ You already unlocked this offer!";
-}
-
 // silver layer
 ctx.fillStyle = "#C0C0C0";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+let scratched = false;
 
 function scratch(x, y) {
   var rect = canvas.getBoundingClientRect();
@@ -103,8 +157,23 @@ function scratch(x, y) {
   ctx.arc(x, y, 20, 0, 2 * Math.PI);
   ctx.fill();
 
-  localStorage.setItem("used", true);
-  document.getElementById("msg").innerText="🎉 Offer Unlocked!";
+  if(!scratched){
+    scratched = true;
+
+    // show reward
+    document.getElementById("rewardText").style.display = "block";
+
+    // show sparkle
+    let sparkle = document.getElementById("sparkle");
+    sparkle.style.display = "block";
+
+    for(let i=0;i<25;i++){
+      let s = document.createElement("span");
+      s.style.left = Math.random()*100+"%";
+      s.style.top = Math.random()*100+"%";
+      sparkle.appendChild(s);
+    }
+  }
 }
 
 // mouse
@@ -118,11 +187,6 @@ canvas.addEventListener("touchmove", function(e) {
   scratch(touch.clientX, touch.clientY);
   e.preventDefault();
 });
-
-// CTA
-function claimNow(){
-  window.location.href = "https://wa.me/91XXXXXXXXXX?text=I want to claim my scholarship";
-}
 </script>
 
 </body>
