@@ -40,31 +40,50 @@ border-radius:8px;
 cursor:pointer;
 }
 
+#scratchBox{
+display:none;
+margin-top:15px;
+}
+
 canvas{
-margin-top:10px;
 border-radius:10px;
 }
 
+/* hidden reward */
 .reward{
 display:none;
-font-size:20px;
+font-size:22px;
 color:#892043;
 font-weight:bold;
+margin-top:10px;
+animation:pop 0.5s ease;
+}
+
+@keyframes pop{
+from{transform:scale(0.5);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+/* sparkle */
+.sparkle{
+position:relative;
+height:0;
 }
 
 .sparkle span{
 position:absolute;
-width:5px;
-height:5px;
+width:6px;
+height:6px;
 background:gold;
 border-radius:50%;
-animation:up 1s infinite;
+animation:fly 1s linear infinite;
 }
 
-@keyframes up{
+@keyframes fly{
 0%{opacity:1; transform:translateY(0);}
-100%{opacity:0; transform:translateY(-50px);}
+100%{opacity:0; transform:translateY(-60px);}
 }
+
 </style>
 </head>
 
@@ -72,62 +91,53 @@ animation:up 1s infinite;
 
 <div class="card">
 
-<h3>🎯 Scratch & Win ₹5000</h3>
+<h3>🎯 Unlock Your Scholarship</h3>
 
+<!-- FORM -->
 <div id="formBox">
 <input id="name" placeholder="Enter Name">
 <input id="phone" placeholder="Enter Phone">
-<button onclick="submitData()">Unlock Offer</button>
+<button onclick="startScratch()">Continue</button>
 </div>
 
-<div id="scratchBox" style="display:none;">
+<!-- SCRATCH AREA -->
+<div id="scratchBox">
 <canvas id="canvas" width="300" height="120"></canvas>
-<div id="reward" class="reward">🎉 ₹5000 WON 🎉</div>
-<div id="sparkle"></div>
+
+<div id="reward" class="reward">
+🎉 ₹5000 SCHOLARSHIP UNLOCKED 🎉
+</div>
+
+<div id="sparkle" class="sparkle"></div>
 </div>
 
 </div>
 
 <script>
 
-// 🔥 PASTE YOUR GOOGLE SCRIPT URL HERE
-var API_URL = "PASTE_YOUR_WEB_APP_URL";
-
 // prevent repeat
 if(localStorage.getItem("claimed")){
 document.getElementById("formBox").innerHTML="⚠️ Offer already claimed";
 }
 
-function submitData(){
+// STEP 1 → SHOW SCRATCH ONLY AFTER FORM
+function startScratch(){
 
 let name=document.getElementById("name").value;
 let phone=document.getElementById("phone").value;
 
-if(name==""||phone==""){
-alert("Fill details");
-return;
-}
-
-fetch(API_URL,{
-method:"POST",
-body:JSON.stringify({name,phone})
-})
-.then(res=>res.text())
-.then(res=>{
-
-if(res=="EXISTS"){
-alert("Already claimed!");
+if(name=="" || phone==""){
+alert("Please fill details");
 return;
 }
 
 document.getElementById("formBox").style.display="none";
 document.getElementById("scratchBox").style.display="block";
+
 initScratch();
-
-});
-
 }
 
+// STEP 2 → SCRATCH LOGIC
 function initScratch(){
 
 var canvas=document.getElementById("canvas");
@@ -136,7 +146,7 @@ var ctx=canvas.getContext("2d");
 ctx.fillStyle="#C0C0C0";
 ctx.fillRect(0,0,300,120);
 
-let done=false;
+let revealed=false;
 
 function scratch(x,y){
 
@@ -149,36 +159,33 @@ ctx.beginPath();
 ctx.arc(x,y,20,0,Math.PI*2);
 ctx.fill();
 
-if(!done){
-done=true;
+// STEP 3 → SHOW REWARD ONLY AFTER SCRATCH
+if(!revealed){
+revealed=true;
 
 document.getElementById("reward").style.display="block";
 
+// sparkle
 let sp=document.getElementById("sparkle");
-
 for(let i=0;i<30;i++){
 let s=document.createElement("span");
 s.style.left=Math.random()*100+"%";
-s.style.top=Math.random()*100+"%";
+s.style.top="50px";
 sp.appendChild(s);
 }
 
 // mark claimed
 localStorage.setItem("claimed",true);
 
-// 🔥 WhatsApp redirect
-setTimeout(()=>{
-window.location.href="https://wa.me/91XXXXXXXXXX?text=I%20won%205000%20offer";
-},2000);
-
+}
 }
 
-}
-
+// mouse
 canvas.addEventListener("mousemove",e=>{
 if(e.buttons==1) scratch(e.clientX,e.clientY);
 });
 
+// touch
 canvas.addEventListener("touchmove",e=>{
 scratch(e.touches[0].clientX,e.touches[0].clientY);
 e.preventDefault();
